@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) => ({
         left: -10,
         '& svg': {
             color: primaryColor,
-            fontSize: 30
+            fontSize: 35
         },
         cursor: "pointer"
     },
