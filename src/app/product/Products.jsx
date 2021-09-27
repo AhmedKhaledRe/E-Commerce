@@ -3,12 +3,13 @@ import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import { compose } from "recompose";
 // @Material-UI
-import { Typography, Paper, Grid, Slide } from "@material-ui/core";
+import { Typography, Paper, Grid, Slide, IconButton } from "@material-ui/core";
 import Rating from '@material-ui/lab/Rating';
 import FILTERS from '../../common/helper/filters';
 import MainProduct from "./MainProduct";
 // Styles
 import { useStyles } from "./productsStyles";
+import { ArrowBack } from "@material-ui/icons";
 
 const Products = ({ products, match, history, productsData }) => {
     const classes = useStyles();
@@ -25,6 +26,9 @@ const Products = ({ products, match, history, productsData }) => {
     return (
         <Slide in direction="right">
             <div className={classes.mainProducts}>
+                <IconButton onClick={() => history.push("/category")} color="primary" className={classes.back} >
+                    <ArrowBack />
+                </IconButton>
                 <MainProduct
                     dataTable={productsData.filter(pr => +pr.categoryId === +id)}
                     loaded={products?.loaded}

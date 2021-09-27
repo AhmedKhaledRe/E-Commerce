@@ -17,6 +17,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   Container: {
     position: "relative",
+    marginTop: 30
   },
   filter: {
     margin: 25,

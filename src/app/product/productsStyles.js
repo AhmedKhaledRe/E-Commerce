@@ -2,9 +2,20 @@ import { makeStyles } from "@material-ui/core/styles";
 import { primaryColor, tealColor } from "../../common/assets/jss/appStyles";
 
 export const useStyles = makeStyles((theme) => ({
+    back: {
+        position: 'absolute', 
+        top: -40, 
+        left: -10,
+        '& svg': {
+            color: primaryColor,
+            fontSize: 30
+        },
+        cursor: "pointer"
+    },
     mainProducts: {
         width: "100%",
         margin: "0px auto 25px",
+        position: "relative"
     },
     product__container: {
         margin: "20px",
