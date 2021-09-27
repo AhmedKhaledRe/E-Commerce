@@ -35,7 +35,10 @@ const MainProduct = ({ children, filters, setData, form, loaded, dataTable, min,
     handleFilter("", newValue[0], newValue[1]);
   };
 
-  const clearScroll = () => setValueScroll([min, max]);
+  const clearScroll = () => {
+    setValueScroll([min, max]);
+    handleFilter("", min, max);
+  }
 
   // Extract every value from the objects
   const getObjectValues = (obj) => (obj && typeof obj === 'object')
@@ -65,17 +68,16 @@ const MainProduct = ({ children, filters, setData, form, loaded, dataTable, min,
     // remove value from search box
     delete form?.search?.values?.query;
 
-      if (filterNewValue && filterNewValue.includes("all") && !filterData[filterName].includes("all")) {
-        filterNewValue = filters.find(fi => fi.name === filterName).items;
-      }  
-      else if (filterNewValue && filterData[filterName].includes("all") && !filterNewValue.includes("all")) {
-        filterNewValue = [];
-      }
+    if (filterNewValue && filterNewValue.includes("all") && !filterData[filterName].includes("all")) {
+      filterNewValue = filters.find(fi => fi.name === filterName).items;
+    }  
+    else if (filterNewValue && filterData[filterName].includes("all") && !filterNewValue.includes("all")) {
+      filterNewValue = [];
+    }
     
     const newFilter = filterName ? { ...filterData, [filterName]: filterNewValue, query: ""} : { ...filterData, query: ""};
-    console.log({newFilter})
     setData(dataTable.filter(prod => {
-      return +prod.price >= +(from || valueScroll[0]) && +prod.price <= (+to || valueScroll[1]) 
+      return (+prod.price >= +(from || valueScroll[0]) && +prod.price <= (+to || valueScroll[1]))
         && (newFilter.Color.length > 0 ? ((newFilter.Color).includes(prod.color)) : true)
         && (newFilter.Rate.length > 0 ? ((newFilter.Rate).includes(+prod.rating)) : true);
     }));
